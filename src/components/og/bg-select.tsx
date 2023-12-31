@@ -30,7 +30,17 @@ export const BgSelect: React.FC<Props> = ({
         <CardDescription>Cute colors and such</CardDescription>
       </CardHeader>
       <CardContent>
-        <Tabs defaultValue="solid" className="w-fit">
+        <Tabs
+          defaultValue="gradient"
+          className="w-fit"
+          onValueChange={(value) => {
+            if (value === "gradient") {
+              setColor("from-pink-300 via-purple-300 to-indigo-400");
+            } else {
+              setColor("bg-[#e5715b]");
+            }
+          }}
+        >
           <TabsList>
             <TabsTrigger value="solid">Solid</TabsTrigger>
             <TabsTrigger value="gradient">Gradient</TabsTrigger>

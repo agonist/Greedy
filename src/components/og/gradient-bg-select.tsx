@@ -51,7 +51,7 @@ export const GradientBgSelect: React.FC<Props> = ({
       onValueChange={(v) => {
         setColor(v);
       }}
-      className="grid grid-cols-8 "
+      className="grid grid-cols-8 gap-1"
     >
       {colors.map((c, i) => (
         <RadioGroupItem

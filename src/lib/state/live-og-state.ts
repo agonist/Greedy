@@ -19,10 +19,10 @@ interface OgBuilder {
 export const useOgBuilder = create<OgBuilder>()((set) => ({
   tag: "OG Kush",
   title: "Your Very Own Open Graph Images",
-  bgColor: "bg-gray-100",
+  bgColor: "from-pink-300 via-purple-300 to-indigo-400",
   logo: "img/logo.png",
   image: "img/screenshot.png",
-  gradientDirection: "bg-gradient-to-r",
+  gradientDirection: "bg-gradient-to-t",
 
   setTag(tag) {
     set({ tag: tag });
