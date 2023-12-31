@@ -6,12 +6,14 @@ interface OgBuilder {
   bgColor: string;
   logo: string;
   image: string;
+  gradientDirection: string;
 
   setTag: (tag: string) => void;
   setTitle: (title: string) => void;
   setBgColor: (color: string) => void;
   setLogo: (url: string) => void;
   setImage: (url: string) => void;
+  setGradientDirection: (direction: string) => void;
 }
 
 export const useOgBuilder = create<OgBuilder>()((set) => ({
@@ -20,6 +22,7 @@ export const useOgBuilder = create<OgBuilder>()((set) => ({
   bgColor: "bg-gray-100",
   logo: "img/logo.png",
   image: "img/screenshot.png",
+  gradientDirection: "bg-gradient-to-r",
 
   setTag(tag) {
     set({ tag: tag });
@@ -35,5 +38,8 @@ export const useOgBuilder = create<OgBuilder>()((set) => ({
   },
   setImage(url) {
     set({ image: url });
+  },
+  setGradientDirection(direction) {
+    set({ gradientDirection: direction });
   },
 }));

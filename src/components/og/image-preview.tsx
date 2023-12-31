@@ -7,6 +7,7 @@ type Props = {
   logo: string;
   banner: string;
   bgColor: string;
+  gradientDirection: string;
   fwref: (domNode: HTMLDivElement) => void;
 };
 
@@ -16,13 +17,17 @@ export const ImagePreview: React.FC<Props> = ({
   logo,
   banner,
   bgColor,
+  gradientDirection,
   fwref,
 }) => {
   return (
     <Card className="w-full h-fit p-4">
       <div
         ref={fwref}
-        className={cn("flex w-[600px] h-[315px] pl-4 pt-4 space-x-4", bgColor)}
+        className={cn(
+          "flex w-[600px] h-[315px] pl-4 pt-4 space-x-4",
+          `${gradientDirection} ${bgColor}`
+        )}
       >
         <div className="flex flex-col w-1/2">
           <img

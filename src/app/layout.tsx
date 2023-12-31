@@ -5,8 +5,9 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "I'm Lenny",
-  description: "Lenny give you useful stuff for making your app",
+  title: "Greedy - Free & Open-Source Tools For Developers",
+  description:
+    "Greedy is a collection of small free tools to help you with annoying stuff.",
 };
 
 export default function RootLayout({

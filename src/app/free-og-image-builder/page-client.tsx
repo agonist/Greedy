@@ -48,7 +48,12 @@ export const FreeOgImageBuilder = () => {
             image={builder.image}
             setImage={builder.setImage}
           />
-          <BgSelect color={builder.bgColor} setColor={builder.setBgColor} />
+          <BgSelect
+            color={builder.bgColor}
+            setColor={builder.setBgColor}
+            direction={builder.gradientDirection}
+            setDirection={builder.setGradientDirection}
+          />
         </div>
         <div className="flex flex-col w-2/4 space-y-4">
           <ImagePreview
@@ -57,6 +62,7 @@ export const FreeOgImageBuilder = () => {
             bgColor={builder.bgColor}
             logo={builder.logo}
             banner={builder.image}
+            gradientDirection={builder.gradientDirection}
             fwref={ref}
           />
           <SaveImg savePng={convertToPng} />
