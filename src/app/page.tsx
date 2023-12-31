@@ -24,14 +24,13 @@ export default function Home() {
           <br /> To Help With The Annoying Stuff
         </h1>
         <h2 className="text-xl text-muted-foreground font-semibold tracking-tight">
-          Because you don't always want to pay for another SaaS.
+          {"Because you don't always want to pay for another SaaS."}
         </h2>
 
         <BentoGrid className=" md:auto-rows-[20rem] mt-16">
           {items.map((item, i) => (
-            <Link href={"/free-og-image-builder"}>
+            <Link href={"/free-og-image-builder"} key={i}>
               <BentoGridItem
-                key={i}
                 title={item.title}
                 description={item.description}
                 header={item.header}
