@@ -3,6 +3,7 @@ import "./globals.css";
 import { Nav } from "@/components/nav";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
+import { inter, notoSans, openSans, robotoMono } from "./font";
 
 export const metadata: Metadata = {
   title: "Greedy - Free & Open-Source Tools For Developers",
@@ -16,7 +17,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={cn(
+        inter.variable,
+        openSans.variable,
+        notoSans.variable,
+        robotoMono.variable
+      )}
+    >
       <body className={cn("min-h-screen bg-background antialiased font-mono")}>
         <ThemeProvider
           attribute="class"

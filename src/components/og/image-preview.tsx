@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Card } from "../ui/card";
 import { cn } from "@/lib/utils";
 
@@ -8,6 +9,7 @@ type Props = {
   banner: string;
   bgColor: string;
   gradientDirection: string;
+  font: string;
   fwref: (domNode: HTMLDivElement) => void;
 };
 
@@ -18,8 +20,12 @@ export const ImagePreview: React.FC<Props> = ({
   banner,
   bgColor,
   gradientDirection,
+  font,
   fwref,
 }) => {
+  useEffect(() => {
+    console.log(font);
+  }, [font]);
   return (
     <Card className="w-full h-fit p-4">
       <div
@@ -39,7 +45,9 @@ export const ImagePreview: React.FC<Props> = ({
           />
 
           <p className="border rounded-xl w-fit px-2 text-black mt-8">{tag}</p>
-          <p className="text-3xl text-black mt-4">{title}</p>
+          <p className={cn("text-3xl text-black mt-4", `font-${font}`)}>
+            {title}
+          </p>
         </div>
         <div className="flex relative w-1/2  h-full overflow-hidden">
           <div className="w-full h-full">

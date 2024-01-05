@@ -7,6 +7,7 @@ interface OgBuilder {
   logo: string;
   image: string;
   gradientDirection: string;
+  font: string;
 
   setTag: (tag: string) => void;
   setTitle: (title: string) => void;
@@ -14,6 +15,7 @@ interface OgBuilder {
   setLogo: (url: string) => void;
   setImage: (url: string) => void;
   setGradientDirection: (direction: string) => void;
+  setFont: (font: string) => void;
 }
 
 export const useOgBuilder = create<OgBuilder>()((set) => ({
@@ -23,6 +25,7 @@ export const useOgBuilder = create<OgBuilder>()((set) => ({
   logo: "img/logo.png",
   image: "img/screenshot.png",
   gradientDirection: "bg-gradient-to-t",
+  font: "inter",
 
   setTag(tag) {
     set({ tag: tag });
@@ -41,5 +44,8 @@ export const useOgBuilder = create<OgBuilder>()((set) => ({
   },
   setGradientDirection(direction) {
     set({ gradientDirection: direction });
+  },
+  setFont(font) {
+    set({ font: font });
   },
 }));

@@ -7,6 +7,7 @@ import {
   TemplateDefinition,
   TemplateOptions,
 } from "@/components/og/template-options";
+import { TextOptions } from "@/components/og/text-options";
 import { useOgBuilder } from "@/lib/state/live-og-state";
 import { useToPng } from "@hugocxl/react-to-image";
 
@@ -54,6 +55,8 @@ export const FreeOgImageBuilder = () => {
             direction={builder.gradientDirection}
             setDirection={builder.setGradientDirection}
           />
+
+          <TextOptions font={builder.font} setFont={builder.setFont} />
         </div>
         <div className="flex flex-col w-2/4 space-y-4">
           <ImagePreview
@@ -63,6 +66,7 @@ export const FreeOgImageBuilder = () => {
             logo={builder.logo}
             banner={builder.image}
             gradientDirection={builder.gradientDirection}
+            font={builder.font}
             fwref={ref}
           />
           <SaveImg savePng={convertToPng} />
