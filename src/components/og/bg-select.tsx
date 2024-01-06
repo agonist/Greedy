@@ -24,7 +24,7 @@ export const BgSelect: React.FC<Props> = ({
   setDirection,
 }) => {
   return (
-    <Card className="w-fit">
+    <Card className="w-full">
       <CardHeader>
         <CardTitle>Background</CardTitle>
         <CardDescription>Cute colors and such</CardDescription>

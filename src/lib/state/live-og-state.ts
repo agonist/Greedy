@@ -1,6 +1,36 @@
 import { create } from "zustand";
 
+interface Template {
+  name: string;
+}
+
+interface TextProperties {
+  name: string;
+  text: string;
+  color: string;
+  font: string;
+}
+
+interface ImageProperties {
+  path: string;
+}
+
+interface BackgroundProperties {
+  color: string;
+  garidnetDirection: string;
+}
+
+interface FirstTemplate extends Template {
+  tag: TextProperties;
+  title: TextProperties;
+  background: BackgroundProperties;
+  logo: ImageProperties;
+  image: ImageProperties;
+}
+
 interface OgBuilder {
+  selectedTemplate: Template;
+
   tag: string;
   title: string;
   bgColor: string;
@@ -19,6 +49,10 @@ interface OgBuilder {
 }
 
 export const useOgBuilder = create<OgBuilder>()((set) => ({
+  selectedTemplate: {
+    name: "",
+  },
+
   tag: "OG Kush",
   title: "Your Very Own Open Graph Images",
   bgColor: "from-pink-300 via-purple-300 to-indigo-400",
@@ -47,5 +81,5 @@ export const useOgBuilder = create<OgBuilder>()((set) => ({
   },
   setFont(font) {
     set({ font: font });
-  },
+  }
 }));

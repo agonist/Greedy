@@ -66,7 +66,7 @@ export const TextOptions: React.FC<Props> = ({ font, setFont }) => {
               variant="outline"
               role="combobox"
               aria-expanded={open}
-              className="w-[200px] justify-between"
+              className="w-full justify-between"
             >
               {font
                 ? frameworks.find((framework) => framework.value === font)
@@ -75,9 +75,12 @@ export const TextOptions: React.FC<Props> = ({ font, setFont }) => {
               <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-[200px] p-0">
+          <PopoverContent className="w-[250px] p-0">
             <Command>
-              <CommandInput placeholder="Search framework..." className="h-9" />
+              <CommandInput
+                placeholder="Search Font..."
+                className="h-9 w-full"
+              />
               <CommandEmpty>No framework found.</CommandEmpty>
               <CommandGroup>
                 {frameworks.map((framework) => (
@@ -85,7 +88,7 @@ export const TextOptions: React.FC<Props> = ({ font, setFont }) => {
                     key={framework.value}
                     value={framework.value}
                     onSelect={(currentValue) => {
-                      setFont(currentValue === font ? "" : currentValue);
+                      setFont(currentValue);
                       setOpen(false);
                     }}
                   >

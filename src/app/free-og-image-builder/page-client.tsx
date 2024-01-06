@@ -36,8 +36,8 @@ export const FreeOgImageBuilder = () => {
 
   return (
     <main className="container mx-auto">
-      <div className="flex w-full py-4 space-x-4">
-        <div className="flex flex-col w-1/4 space-y-4  ">
+      <div className="flex w-full py-4 space-x-4 ">
+        <div className="flex flex-col w-3/12 space-y-4  overflow-y-auto h-80vh">
           <TemplateOptions
             templateDefinition={defs[0]}
             tag={builder.tag}
@@ -58,20 +58,21 @@ export const FreeOgImageBuilder = () => {
 
           <TextOptions font={builder.font} setFont={builder.setFont} />
         </div>
-        <div className="flex flex-col w-2/4 space-y-4">
-          <ImagePreview
-            tag={builder.tag}
-            title={builder.title}
-            bgColor={builder.bgColor}
-            logo={builder.logo}
-            banner={builder.image}
-            gradientDirection={builder.gradientDirection}
-            font={builder.font}
-            fwref={ref}
-          />
-          <SaveImg savePng={convertToPng} />
+        <div className="flex flex-col w-fit space-y-4 ">
+          <div className="sticky top-1">
+            <ImagePreview
+              tag={builder.tag}
+              title={builder.title}
+              bgColor={builder.bgColor}
+              logo={builder.logo}
+              banner={builder.image}
+              gradientDirection={builder.gradientDirection}
+              font={builder.font}
+              fwref={ref}
+            />
+            <SaveImg savePng={convertToPng} />
+          </div>
         </div>
-        <div className="flex flex-col w-1/4 "></div>
       </div>
     </main>
   );
