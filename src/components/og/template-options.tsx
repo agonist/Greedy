@@ -5,43 +5,57 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-
-export type TemplateDefinition = {
-  hasTag: boolean;
-  hasTitle: boolean;
-};
+import React from "react";
+import { TextEditor } from "./text-editor";
+import { ImageEditor } from "./image-editor";
+import {
+  ImageProperty,
+  TemplateProperty,
+  TextProperty,
+} from "@/types/template";
 
 type Props = {
-  templateDefinition: TemplateDefinition;
-  tag: string;
-  setTag: (tag: string) => void;
-  title: string;
-  setTitle: (title: string) => void;
-  logo: string;
-  setLogo: (file: string) => void;
-  image: string;
-  setImage: (file: string) => void;
+  properties: TemplateProperty[];
+  updateProperty: (name: string, value: any) => void;
 };
 
-export const TemplateOptions = (props: Props) => {
-  const handleLogoInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    const file = ev.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      props.setLogo(url);
+export const TemplateOptions: React.FC<Props> = ({
+  properties,
+  updateProperty,
+}) => {
+  function renderComponent(field: any) {
+    if (typeof field === "object" && field !== null) {
+      if (isTextProperties(field)) {
+        return (
+          <TextEditor
+            t={field}
+            setText={(v) => {
+              updateProperty(field.name, v);
+            }}
+          />
+        );
+      } else if (isImageProperties(field)) {
+        return (
+          <ImageEditor
+            i={field}
+            setImage={(i) => {
+              updateProperty(field.name, i);
+            }}
+          />
+        );
+      }
     }
+
+    return null;
+  }
+
+  const isTextProperties = (object: any): object is TextProperty => {
+    return "text" in object && "font" in object;
   };
 
-  const handleImageInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    const file = ev.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      props.setImage(url);
-    }
+  const isImageProperties = (object: any): object is ImageProperty => {
+    return "name" in object && "path" in object;
   };
-
   return (
     <Card className="w-full">
       <CardHeader>
@@ -50,37 +64,9 @@ export const TemplateOptions = (props: Props) => {
       </CardHeader>
 
       <CardContent className="flex flex-col space-y-4">
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="tag">Tag</Label>
-          <Input
-            type="text"
-            id="tag"
-            placeholder="Tag"
-            value={props.tag}
-            onChange={(ev) => props.setTag(ev.target.value)}
-          />
-        </div>
-
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="title">Title</Label>
-          <Input
-            type="text"
-            id="title"
-            placeholder="Title"
-            value={props.title}
-            onChange={(ev) => props.setTitle(ev.target.value)}
-          />
-        </div>
-
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="logo">Logo</Label>
-          <Input id="logo" type="file" onChange={handleLogoInputChange} />
-        </div>
-
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="image">Image</Label>
-          <Input id="image" type="file" onChange={handleImageInputChange} />
-        </div>
+        {Object.values(properties).map((field, index) => (
+          <div key={index}>{renderComponent(field)}</div>
+        ))}
       </CardContent>
     </Card>
   );

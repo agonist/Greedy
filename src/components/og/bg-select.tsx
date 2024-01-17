@@ -1,3 +1,4 @@
+import { BackgroundProperty, TemplateProperty } from "@/types/template";
 import {
   Card,
   CardContent,
@@ -11,18 +12,29 @@ import { GradientDirectionSelect } from "./gradient-direction-select";
 import { SolidBgSelect } from "./solid-bg-select";
 
 type Props = {
-  color: string;
-  direction: string;
-  setColor: (color: string) => void;
-  setDirection: (direction: string) => void;
+  properties: TemplateProperty[];
+  updateProperty: (name: string, value: any) => void;
 };
 
-export const BgSelect: React.FC<Props> = ({
-  color,
-  setColor,
-  direction,
-  setDirection,
-}) => {
+export const BgSelect: React.FC<Props> = ({ properties, updateProperty }) => {
+  const background = properties.find(
+    (p) => p.name === "background"
+  ) as BackgroundProperty;
+
+  function updateColor(color: string) {
+    updateProperty("background", {
+      ...background,
+      color: color,
+    });
+  }
+
+  function updateDirection(direction: string) {
+    updateProperty("background", {
+      ...background,
+      gradientDirection: direction,
+    });
+  }
+
   return (
     <Card className="w-full">
       <CardHeader>
@@ -35,9 +47,12 @@ export const BgSelect: React.FC<Props> = ({
           className="w-fit"
           onValueChange={(value) => {
             if (value === "gradient") {
-              setColor("from-pink-300 via-purple-300 to-indigo-400");
+              updateColor("from-pink-300 via-purple-300 to-indigo-400");
+              // setColor("from-pink-300 via-purple-300 to-indigo-400");
             } else {
-              setColor("bg-[#e5715b]");
+              updateColor("bg-[#e5715b]");
+
+              // setColor("bg-[#e5715b]");
             }
           }}
         >
@@ -46,17 +61,17 @@ export const BgSelect: React.FC<Props> = ({
             <TabsTrigger value="gradient">Gradient</TabsTrigger>
           </TabsList>
           <TabsContent value="solid">
-            <SolidBgSelect color={color} setColor={setColor} />
+            <SolidBgSelect color={background.color} setColor={updateColor} />
           </TabsContent>
           <TabsContent value="gradient" className="flex flex-col space-y-2">
             <GradientBgSelect
-              color={color}
-              setColor={setColor}
-              direction={direction}
+              color={background.color}
+              setColor={updateColor}
+              direction={background.gradientDirection}
             />
             <GradientDirectionSelect
-              direction={direction}
-              setDirection={setDirection}
+              direction={background.gradientDirection}
+              setDirection={updateDirection}
             />
           </TabsContent>
         </Tabs>
