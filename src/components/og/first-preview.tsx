@@ -16,13 +16,17 @@ export const FirstPreview: React.FC<Props> = ({ template, fwref }) => {
   const background = template.properties.find(
     (p) => p.name === "background"
   ) as BackgroundProperty;
+
   const image = template.properties.find(
     (p) => p.name === "image"
   ) as ImageProperty;
+
   const logo = template.properties.find(
     (p) => p.name === "logo"
   ) as ImageProperty;
+
   const tag = template.properties.find((p) => p.name === "tag") as TextProperty;
+
   const title = template.properties.find(
     (p) => p.name === "title"
   ) as TextProperty;
@@ -45,10 +49,16 @@ export const FirstPreview: React.FC<Props> = ({ template, fwref }) => {
             className="rounded-md"
           />
 
-          <p className="border rounded-xl w-fit px-2 text-black mt-8">
+          <p
+            className={cn(
+              "border rounded-xl w-fit px-2  mt-8",
+              tag.font,
+              `${tag.color.replace("bg", "text")}`
+            )}
+          >
             {tag.text}
           </p>
-          <p className={cn("text-3xl text-black mt-4", `font-${title.font}`)}>
+          <p className={cn("text-3xl  mt-4", title.font, `${title.color}`)}>
             {title.text}
           </p>
         </div>

@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { GradientBgSelect } from "./gradient-bg-select";
 import { GradientDirectionSelect } from "./gradient-direction-select";
 import { SolidBgSelect } from "./solid-bg-select";
+import { backgroundColors } from "@/const";
 
 type Props = {
   properties: TemplateProperty[];
@@ -48,11 +49,8 @@ export const BgSelect: React.FC<Props> = ({ properties, updateProperty }) => {
           onValueChange={(value) => {
             if (value === "gradient") {
               updateColor("from-pink-300 via-purple-300 to-indigo-400");
-              // setColor("from-pink-300 via-purple-300 to-indigo-400");
             } else {
               updateColor("bg-[#e5715b]");
-
-              // setColor("bg-[#e5715b]");
             }
           }}
         >
@@ -61,7 +59,11 @@ export const BgSelect: React.FC<Props> = ({ properties, updateProperty }) => {
             <TabsTrigger value="gradient">Gradient</TabsTrigger>
           </TabsList>
           <TabsContent value="solid">
-            <SolidBgSelect color={background.color} setColor={updateColor} />
+            <SolidBgSelect
+              color={background.color}
+              setColor={updateColor}
+              colors={backgroundColors}
+            />
           </TabsContent>
           <TabsContent value="gradient" className="flex flex-col space-y-2">
             <GradientBgSelect

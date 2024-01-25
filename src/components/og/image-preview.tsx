@@ -45,9 +45,7 @@ export const ImagePreview: React.FC<Props> = ({
           />
 
           <p className="border rounded-xl w-fit px-2 text-black mt-8">{tag}</p>
-          <p className={cn("text-3xl text-black mt-4", `font-${font}`)}>
-            {title}
-          </p>
+          <p className={cn("text-3xl text-black mt-4", font)}>{title}</p>
         </div>
         <div className="flex relative w-1/2  h-full overflow-hidden">
           <div className="w-full h-full">

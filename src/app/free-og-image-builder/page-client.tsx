@@ -4,29 +4,24 @@ import { BgSelect } from "@/components/og/bg-select";
 import { FirstPreview } from "@/components/og/first-preview";
 import { SaveImg } from "@/components/og/save-img";
 import { TemplateOptions } from "@/components/og/template-options";
-import { Template } from "@/types/template";
 import { useToPng } from "@hugocxl/react-to-image";
-import { useState } from "react";
-
-const useStateGeneric = <T extends Template>(initialState: T) => {
-  return useState<T>(initialState);
-};
+import { useEffect, useState } from "react";
 
 export const FreeOgImageBuilder = () => {
-  const [template, setTemplate] = useStateGeneric({
+  const [template, setTemplate] = useState({
     name: "First Template",
     properties: [
       {
         name: "tag",
         color: "text-black",
         text: "OG KUSH",
-        font: "inter",
+        font: "font-inter",
       },
       {
         name: "title",
         color: "text-black",
         text: "Your very own Open Graph Images",
-        font: "inter",
+        font: "font-inter",
       },
       {
         name: "background",
@@ -44,32 +39,32 @@ export const FreeOgImageBuilder = () => {
     ],
   });
 
+  useEffect(() => {
+    console.log(template);
+  }, [template]);
+
   const updatePropertyByName = (
     propertyName: string,
     newPropertyValues: any
   ) => {
     setTemplate((prevTemplate) => {
-      // Find the index of the property to update
       const propertyIndex = prevTemplate.properties.findIndex(
         (prop) => prop.name === propertyName
       );
 
       if (propertyIndex === -1) {
         console.warn(`Property with name ${propertyName} not found.`);
-        return prevTemplate; // Return the original state if property not found
+        return prevTemplate;
       }
-
-      // Create a new array with the updated property
       const updatedProperties = [
-        ...prevTemplate.properties.slice(0, propertyIndex), // Elements before the updated property
+        ...prevTemplate.properties.slice(0, propertyIndex),
         {
           ...prevTemplate.properties[propertyIndex],
-          ...newPropertyValues, // Update the specific property
+          ...newPropertyValues,
         },
-        ...prevTemplate.properties.slice(propertyIndex + 1), // Elements after the updated property
+        ...prevTemplate.properties.slice(propertyIndex + 1),
       ];
 
-      // Return the new state
       return {
         ...prevTemplate,
         properties: updatedProperties,

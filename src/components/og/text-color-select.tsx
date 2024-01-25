@@ -1,13 +1,20 @@
 import { cn } from "@/lib/utils";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Color, textColors } from "@/const";
 
 type Props = {
-  colors: string[];
+  colors: Color[];
   color: string;
   setColor: (color: string) => void;
 };
 
-export const SolidBgSelect: React.FC<Props> = ({ color, setColor, colors }) => {
+export const TextColorSelect: React.FC<Props> = ({
+  color,
+  setColor,
+  colors,
+}) => {
+  const tcolors = textColors;
+
   return (
     <RadioGroup
       value={color}
@@ -17,17 +24,17 @@ export const SolidBgSelect: React.FC<Props> = ({ color, setColor, colors }) => {
       }}
       className="grid grid-cols-8 gap-1"
     >
-      {colors.map((c, i) => (
+      {tcolors.map((c, i) => (
         <RadioGroupItem
           key={i}
-          value={c}
+          value={c.txt}
           aria-label="Toggle bold"
           className={cn(
             "p-0 h-fit w-fit rounded-md border-2",
-            color === c ? " border-white" : "border-transparent"
+            color === c.txt ? " border-white" : "border-transparent"
           )}
         >
-          <div className={cn("h-7 w-7 rounded-sm", c)} />
+          <div className={cn("h-7 w-7 rounded-sm", c.bg)} />
         </RadioGroupItem>
       ))}
     </RadioGroup>
